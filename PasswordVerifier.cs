@@ -12,28 +12,33 @@
             {
                 if (string.IsNullOrWhiteSpace(password))
                 {
-                    throw new Exception("Password should not be empty");
                     isTrue = false;
+                    throw new Exception("Password should not be empty");
+
                 }
                 if (password.Length < 8)
                 {
-                    throw new Exception("Password should be longer than 8 characters");
                     isTrue = false;
+                    throw new Exception("Password should be longer than 8 characters");
+
                 }
                 if (!password.Any(char.IsUpper))
                 {
-                    throw new Exception("Password should have at least one uppercase letter");
                     isTrue = false;
+                    throw new Exception("Password should have at least one uppercase letter");
+
                 }
                 if (!password.Any(char.IsLower))
                 {
-                    throw new Exception("Password should at least one lowercase letter");
                     isTrue = false;
+                    throw new Exception("Password should at least one lowercase letter");
+
                 }
                 if (!password.Any(char.IsDigit))
                 {
-                    throw new Exception("Password should have at least one digit");
                     isTrue = false;
+                    throw new Exception("Password should have at least one digit");
+
                 }
             }
             catch (Exception e)
