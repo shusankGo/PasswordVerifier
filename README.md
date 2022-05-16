@@ -1,5 +1,6 @@
 # PasswordVerifier
-Password Verifier
+Program to verify user input password. 
+
 Verification of password will fail if any one of the rules mentioned does not pass.
 
 Implementation of following rules:
