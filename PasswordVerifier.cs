@@ -16,7 +16,7 @@ namespace PasswordVerifier
             try
             {
                 int errorCount = 0; //count number of errors
-                var exceptions = new List<Exception>(); //list of exceptions to catch
+                var exceptions = new List<Exception>(); //empty list of exceptions to catch
                 if (string.IsNullOrWhiteSpace(password)) //check for null or white space 
                 {
                     isValid = false;
