@@ -1,57 +1,43 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PasswordVerifier
+﻿namespace PasswordVerifier
 {
-    internal class PasswordVerification
+    internal class PasswordVerify
     {
-        static int MIN_PASS_LENGTH = 8; //minimum password length
-
-        static bool verifyPassword(string password)
+        public const int MinPassLength = 8;
+        static bool VerifyPassword(string password)
         {
             bool isValid = true; //set true by default
             try
             {
-                int errorCount = 0; //count number of errors
-                var exceptions = new List<Exception>(); //empty list of exceptions to catch
-                if (string.IsNullOrWhiteSpace(password)) //check for null or white space 
+                var exceptions = new List<Exception>(); //list of exceptions to catch
+                if (string.IsNullOrWhiteSpace(password))
                 {
                     isValid = false;
                     exceptions.Add(new ArgumentNullException("Password should not be empty\n"));
-                    errorCount++;
                 }
-                if (password.Length < MIN_PASS_LENGTH) //check for minimum password length
+                if (password.Length < MinPassLength)
                 {
                     isValid = false;
                     exceptions.Add(new Exception("Password should be longer than 8 characters\n"));
-                    errorCount++;
                 }
-                if (!password.Any(char.IsUpper)) //check if uppercase letter is present 
+                if (!password.Any(char.IsUpper))
                 {
                     isValid = false;
                     exceptions.Add(new Exception("Password should have at least one uppercase letter\n"));
-                    errorCount++;
                 }
-                if (!password.Any(char.IsLower)) //check if lowercase letter is present 
+                if (!password.Any(char.IsLower))
                 {
                     isValid = false;
                     exceptions.Add(new Exception("Password should have at least one lowercase letter\n"));
-                    errorCount++;
                 }
-                if (!password.Any(char.IsDigit)) //check digits are present 
+                if (!password.Any(char.IsDigit))
                 {
                     isValid = false;
                     exceptions.Add(new Exception("Password should have at least one digit\n"));
-                    errorCount++;
                 }
-                if (errorCount != 0) //check for errors
-                    throw new AggregateException(exceptions); //throw all the errors in list
-
-
-
+                if (exceptions != null)
+                {
+                    throw new AggregateException(exceptions); //throw all the errors if any present in list
+                }
             }
             catch (AggregateException e)
             {
@@ -59,11 +45,11 @@ namespace PasswordVerifier
             }
             return isValid;
         }
-        static void Main(string[] args)
+
+        static string ReturnPassword()
         {
             Console.WriteLine("Enter your password: ");
-            string password;
-            password = "";
+            string password = "";
             //for entering password as asterik '*'
             do
             {
@@ -80,20 +66,24 @@ namespace PasswordVerifier
                         password = password.Substring(0, (password.Length - 1));
                         Console.Write("\b \b");
                     }
-                    else if (key.Key == ConsoleKey.Enter)
+                    else if (key.Key == ConsoleKey.Enter) //Enter key terminates the program
                     {
                         Console.WriteLine("");
                         break;
                     }
                 }
             } while (true);
+            return password;
+        }
 
-            bool isValid = verifyPassword(password); //call verifyPassword function to verify
-            if (isValid)
+        static void Main(string[] args)
+        {
+            string password = ReturnPassword();
+
+            if (VerifyPassword(password))
                 Console.WriteLine("Password Valid");
             else
                 Console.WriteLine("Password Invalid");
         }
-
     }
 }
