@@ -2,5 +2,5 @@
 .vs/*
 PasswordVerifier/bin/*
 PasswordVerifier/obj/*
-PasswordVerifierTest/bin/*
-PasswordVerifierTest/obj/*
+PasswordVerifyTest/bin/*
+PasswordVerifyTest/obj/*
