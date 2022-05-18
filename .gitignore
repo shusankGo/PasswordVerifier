@@ -1,6 +1,6 @@
-#ignore all dll files
-*.dll
 #ignore bin, obj, .vs directories
 .vs/
-bin/
-obj/
+PasswordVerifier/bin/
+PasswordVerifier/obj/
+PasswordVerifierTest/bin/
+PasswordVerifierTest/obj/
