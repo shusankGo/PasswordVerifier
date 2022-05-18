@@ -1,6 +1,6 @@
 ﻿namespace PasswordVerifier
 {
-    internal class PasswordVerify
+    public class PasswordVerify
     {
         public const int MinPassLength = 8;
         static bool VerifyPassword(string password)
@@ -45,45 +45,10 @@
             }
             return isValid;
         }
-
-        static string ReturnPassword()
+        public static bool PasswordCheck(string password)
         {
-            Console.WriteLine("Enter your password: ");
-            string password = "";
-            //for entering password as asterik '*'
-            do
-            {
-                ConsoleKeyInfo key = Console.ReadKey(true);
-                if (key.Key != ConsoleKey.Backspace && key.Key != ConsoleKey.Enter) // Backspace Should Not Work 
-                {
-                    password += key.KeyChar;
-                    Console.Write("*");
-                }
-                else
-                {
-                    if (key.Key == ConsoleKey.Backspace && password.Length > 0)
-                    {
-                        password = password.Substring(0, (password.Length - 1));
-                        Console.Write("\b \b");
-                    }
-                    else if (key.Key == ConsoleKey.Enter) //Enter key terminates the program
-                    {
-                        Console.WriteLine("");
-                        break;
-                    }
-                }
-            } while (true);
-            return password;
-        }
 
-        static void Main(string[] args)
-        {
-            string password = ReturnPassword();
-
-            if (VerifyPassword(password))
-                Console.WriteLine("Password Valid");
-            else
-                Console.WriteLine("Password Invalid");
+            return VerifyPassword(password); 
         }
     }
 }
