@@ -47,7 +47,6 @@
         }
         public static bool PasswordCheck(string password)
         {
-
             return VerifyPassword(password); 
         }
     }
