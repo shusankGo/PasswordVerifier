@@ -26,10 +26,7 @@ namespace PasswordVerifyTest
         [InlineData(true, "Qatar2022")]
         public void CheckPasswordVerification(bool expectedResult, string password)
         {
-            bool actualResult = false;
-
-            if (PasswordVerify.PasswordCheck(password))
-                actualResult = true;
+            bool actualResult = PasswordVerify.PasswordCheck(password);
 
             Assert.Equal(expectedResult, actualResult);
 
