@@ -4,32 +4,26 @@ namespace PasswordVerifyTest
     public class UnitTestPassword
     {
         [Theory]
-        [InlineData(false, "oausgdsa")]
-        [InlineData(true, "Passw0rd")]
-        [InlineData(false, "appleball123")]
-        [InlineData(true, "AppleBall123")]
-        [InlineData(false, "oongaboonga2323")]
-        [InlineData(true, "00ngaB00nga")]
-        [InlineData(true, "apple123B")]
-        [InlineData(true, "tasdvahbjk1223P")]
-        [InlineData(false, "tajikistan66")]
-        [InlineData(true, "Croatia2000")]
-        [InlineData(false, "france")]
-        [InlineData(false, "APPLE1PAD")]
-        [InlineData(true, "HammerHead1020")]
-        [InlineData(true, "MtEverest8848")]
-        [InlineData(true, "Quagmire00")]
-        [InlineData(false, "HelloWorld")]
-        [InlineData(false, "astdvhj")]
-        [InlineData(true, "Albanian22")]
-        [InlineData(true, "London2020")]
-        [InlineData(true, "Qatar2022")]
-        public void CheckPasswordVerification(bool expectedResult, string password)
+        [InlineData("oausgdsa")]
+        [InlineData("appleball123")]
+        [InlineData("Abc@123")]
+        [InlineData("")]
+        [InlineData("123")]
+        [InlineData("1234567890")]
+        [InlineData("oongaboonga2323")]
+        [InlineData("tajikistan66")]
+        [InlineData("FRANC")]
+        [InlineData("FRANCESCO")]
+        [InlineData("APPLE1PAD")]
+        [InlineData("   ")]
+        [InlineData("astdvhj")]
+        [InlineData("a")]
+        public void CheckPassswordValidity_Password_ThrowsException(string password)
         {
-            bool actualResult = PasswordVerify.PasswordCheck(password);
-
-            Assert.Equal(expectedResult, actualResult);
-
+            //arrange
+            PasswordVerify passwordVerify = new PasswordVerify();
+            //act & assert
+            Assert.ThrowsAny<ArgumentException>(() => PasswordVerify.PasswordCheck(password));
         }
     }
 }
