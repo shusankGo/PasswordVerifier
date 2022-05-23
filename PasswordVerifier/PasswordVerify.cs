@@ -34,15 +34,14 @@
                     throw new ArgumentException("Password should have at least one digit\n");
                 }
             }
-            catch (ArgumentException ex)
+            catch (ArgumentException e)
             {
-                throw new ArgumentException("", ex);
+                throw new ArgumentException("Password is not valid.", e.Message); //throw exceptions
             }
             return isValid;
         }
         public static bool PasswordCheck(string password)
         {
-
             return VerifyPassword(password);
         }
     }
