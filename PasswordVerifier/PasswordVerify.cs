@@ -5,40 +5,45 @@
         public const int MinPassLength = 8;
         static bool VerifyPassword(string password)
         {
-            bool isValid = true; //set true by default
+            var isValid = true;
             try
             {
+                var exceptions = new List<Exception>();
                 if (string.IsNullOrWhiteSpace(password))
                 {
                     isValid = false;
-                    throw new ArgumentException("Password should not be empty\n");
+                    exceptions.Add(new Exception("\nPassword should not be empty"));
                 }
-                if (password.Length < MinPassLength)
+                if (password.Length <= MinPassLength)
                 {
                     isValid = false;
-                    throw new ArgumentException("Password should be longer than 8 characters\n");
+                    exceptions.Add(new Exception($"\nPassword should be longer than {MinPassLength} characters"));
                 }
                 if (!password.Any(char.IsUpper))
                 {
                     isValid = false;
-                    throw new ArgumentException("Password should have at least one uppercase letter\n");
+                    exceptions.Add(new Exception("\nPassword should contain atleast 1 uppercase letter"));
                 }
                 if (!password.Any(char.IsLower))
                 {
                     isValid = false;
-                    throw new ArgumentException("Password should have at least one lowercase letter\n");
+                    exceptions.Add(new Exception("\nPassword should contain atleast 1 lowercase letter"));
                 }
                 if (!password.Any(char.IsDigit))
                 {
                     isValid = false;
-                    throw new ArgumentException("Password should have at least one digit\n");
+                    exceptions.Add(new Exception("\nPassword should contain atleast 1 digit"));
                 }
+                if (exceptions.Count != 0)
+                {
+                    throw new AggregateException(exceptions);
+                }
+                return isValid;
             }
-            catch (ArgumentException e)
+            catch (AggregateException ex)
             {
-                throw new ArgumentException("Password is not valid.", e.Message); //throw exceptions
+                throw new AggregateException(ex);
             }
-            return isValid;
         }
         public static bool PasswordCheck(string password)
         {

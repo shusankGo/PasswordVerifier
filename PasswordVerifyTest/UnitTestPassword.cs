@@ -20,27 +20,26 @@ namespace PasswordVerifyTest
         [InlineData("a")]
         public void PassswordValidity_InvalidPassword_ThrowsException(string password)
         {
-            //arrange
-            PasswordVerify passwordVerify = new PasswordVerify();
             //act & assert
-            Assert.ThrowsAny<ArgumentException>(() => PasswordVerify.PasswordCheck(password));
+            Assert.ThrowsAny<AggregateException>(() => PasswordVerify.PasswordCheck(password));
         }
 
         [Theory]
         [InlineData("AppleBall11")]
         [InlineData("Shusank221")]
-        [InlineData("Amsterdam220")]
+        [InlineData("Amsterdam420")]
         [InlineData("Football2000")]
         [InlineData("22HowToBasic")]
         [InlineData("12783GGaa")]
-        public void PassswordValidity_validPassword_ReturnsTrue(string password)
+        [InlineData("1234567ABcd")]
+        [InlineData("kickBall442200")]
+        [InlineData("HelloWorld2022")]
+        public void PassswordValidity_ValidPassword_ReturnsTrue(string password)
         {
-            //arrange
-            PasswordVerify passwordVerify = new PasswordVerify();
             //act 
             var result = PasswordVerify.PasswordCheck(password);
             //assert
-            Assert.True(result);
+            Assert.True(result); 
         }
     }
 }
